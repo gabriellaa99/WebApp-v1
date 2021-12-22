@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Data Sticky Trap
+{% endblock %}
+
+{% block style %}
+{% endblock %}
+
+{% block content %}
+
+<div class="col-md-11 p-xs mx-auto my-3 text-center">
+ <div class="container-fluid container item-center" style="padding:1em;">
+
+            <h1 class="h3 mb-5 font-weight-normal-center">
+                Data <i>Sticky Trap</i>
+            </h1>
+
+
+<!--<div class="card mb-3" style="width: 690px;">-->
+<!--  <div class="row g-0">-->
+<!--    <div class="col-md-4">-->
+<!--      <img src="static/images/resource/whitefly_cabai.jpg" class="img-fluid rounded-start" alt="...">-->
+<!--    </div>-->
+<!--    <div class="col-md-8">-->
+<!--      <div class="card-body">-->
+<!--        <h5 class="card-title">Card title</h5>-->
+<!--    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+<!--  </div>-->
+<!--  <ul class="list-group list-group-flush">-->
+<!--    <li class="list-group-item">An item</li>-->
+<!--    <li class="list-group-item">A second item</li>-->
+<!--    <li class="list-group-item">A third item</li>-->
+<!--  </ul>-->
+<!--  <div class="card-body">-->
+<!--    <a href="#" class="card-link">Card link</a>-->
+<!--    <a href="#" class="card-link">Another link</a>-->
+<!--  </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+
+{% for item in items %}
+<div class="d-flex justify-content-center">
+<div class="card mb-3" style="width: 690px;">
+  <div class="row">
+    <div class="col-sm-4">
+      <img class="img-fluid" src="{{ item.image }}" alt="Uploaded Image">
+    </div>
+    <div class="col-lg-0">
+      <div class="card-body">
+        <h5 class="card-title">Time: {{ item.created_at }}</h5>
+      </div>
+  <ul class="list-group list-group-flush text-left">
+  {% if item.result != None %}
+<!--    <li class="list-group-item">Tingkat Kerusakan: {{ item.result.damage*100 }}%</li>-->
+    <li class="list-group-item">Tingkat Kerusakan: </li>
+    <li class="list-group-item">
+<!--        Hama Terdeteksi: {{ item.result.total }}    <br>-->
+<!--        1. Whitefly: {{ item.result.whitefly }}-->
+        Hama Terdeteksi:<br>
+        1. Whitefly: {{ item.result.damage*100 }}%
+    </li>
+    <li class="list-group-item">
+        Rekomendasi:<br>
+        1. Gunakan insektisida dengan bahan aktif .. sebanyak ..    <br>
+        2. ..
+    </li>
+
+  {% else %}
+    <li class="list-group-item">Tingkat Kerusakan: </li>
+    <li class="list-group-item">
+        Hama Terdeteksi:<br>
+        Result not yet finished
+    </li>
+    <li class="list-group-item">
+        Rekomendasi:<br>
+        Result not yet finished
+    </li>
+<!--    <li class="list-group-item">A third item</li>-->
+  </ul>
+<!--  <div class="card-body">-->
+<!--    <a href="#" class="card-link">Card link</a>-->
+<!--    <a href="#" class="card-link">Another link</a>-->
+<!--  </div>-->
+  {% endif %}
+    </div>
+  </div>
+</div>
+</div>
+{% endfor %}
+
+<!--    <table class="table table-hover table-white">-->
+<!--      <thead class="thead-dark">-->
+<!--        <tr>-->
+<!--            &lt;!&ndash; Your Columns HERE &ndash;&gt;-->
+<!--            <th scope="col">No.</th>-->
+<!--            <th scope="col">Waktu</th>-->
+<!--            <th scope="col">Sticky Trap</th>-->
+<!--            <th scope="col">Lokasi</th>-->
+<!--            <th scope="col">Keterangan</th>-->
+<!--            <th scope="col">Processed Image</th>-->
+<!--            <th scope="col">Tingkat Kerusakan</th>-->
+<!--        </tr>-->
+<!--      </thead>-->
+
+<!--      <tbody>-->
+<!--        &lt;!&ndash; Your rows inside the table HERE: &ndash;&gt;-->
+<!--        {% for item in items %}-->
+<!--          <tr>-->
+<!--            <td>{{ item.id }}</td>-->
+<!--            <td>{{ item.created_at }}</td>-->
+<!--            <td><img class="img-fluid" src="{{ item.image }}" alt="Uploaded Image" width="100"></td>-->
+<!--            <td>{{ item.place }}</td>-->
+<!--            {% if item.result != None %}-->
+<!--            <td>-->
+<!--              Jumlah Hama: {{ item.result.total }} <br>-->
+<!--              <ul>-->
+<!--                <li> Whitefly: {{ item.result.whitefly }} </li>-->
+<!--                <li> Thripps: {{ item.result.thripps }} </li>-->
+<!--                <li> Lalat Buah: {{ item.result.lalatbuah }} </li>-->
+<!--                <li> Leaf Miner: {{ item.result.leafminer }} </li>-->
+<!--              </ul>-->
+<!--            </td>-->
+<!--            <td><img class="img-fluid" src="{{ item.result.image }}" alt="Processed Image" width="100"></td>-->
+<!--            <td>{{ item.result.damage*100 }}%</td>-->
+<!--            {% else %}-->
+<!--            <td>Result not yet finished</td>-->
+<!--            <td>Result not yet finished</td>-->
+<!--            <td>Result not yet finished</td>-->
+<!--            {% endif %}-->
+<!--          </tr>-->
+<!--        {% endfor %}-->
+<!--      </tbody>-->
+<!--    </table>-->
+
+
+<!--    <form class="form-signin">-->
+<!--      <div class="text-center mb-4">-->
+<!--        <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
+<!--        <h1 class="h3 mb-3 font-weight-normal">Floating labels</h1>-->
+<!--        <p>Build form controls with floating labels via the <code>:placeholder-shown</code> pseudo-element. <a href="https://caniuse.com/#feat=css-placeholder-shown">Works in latest Chrome, Safari, and Firefox.</a></p>-->
+<!--      </div>-->
+
+<!--      <div class="form-label-group">-->
+<!--        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>-->
+<!--        <label for="inputEmail">Email address</label>-->
+<!--      </div>-->
+
+<!--      <div class="form-label-group">-->
+<!--        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>-->
+<!--        <label for="inputPassword">Password</label>-->
+<!--      </div>-->
+
+<!--      <div class="checkbox mb-3">-->
+<!--        <label>-->
+<!--          <input type="checkbox" value="remember-me"> Remember me-->
+<!--        </label>-->
+<!--      </div>-->
+<!--      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>-->
+<!--      <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>-->
+<!--    </form>-->
+
+            <h6 class="h6 text-center">
+                Demikian contoh data yang telah diproses, untuk mencoba sistem kami tekan <a href="{{ url_for('upload_page') }}">disini</a>.
+            </h6>
+
+  </div>
+</div>
+
+{% endblock %}

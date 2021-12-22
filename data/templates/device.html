@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Register Device
+{% endblock %}
+
+{% block content %}
+<body class="text-center">
+    <div class="container">
+        <h1 class="h3 mb-3 font-weight-normal">
+            Isi form berikut untuk registrasi perangkat yang digunakan
+        </h1>
+        <form method="post" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+<!--you have uploaded this image, goback to..-->
+            {{ form.serial.label() }}
+            {{ form.serial(class="form-control", placeholder='Serial Number / Phone Model') }}
+
+            {{ form.firmware_version.label() }}
+            {{ form.firmware_version(class="form-control", placeholder='Firmware Version / Android Version') }}
+
+            {{ form.hardware_version.label() }}
+            {{ form.hardware_version(class="form-control", placeholder="Hardware Version") }}
+
+<!--            <input type="file" class="form-control-file border">-->
+            <input type="submit">
+        </form>
+
+    </div>
+</body>
+
+{% endblock %}

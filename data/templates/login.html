@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Login Page
+{% endblock %}
+
+{% block style %}
+{% endblock %}
+
+{% block content %}
+
+
+<div class="col-md-7 p-md-5 mx-auto my-3">
+ <div class="container-fluid container" style="padding:1em;">
+
+    <div class="container text-center">
+        <form method="POST" class="form-register">
+            {{ form.hidden_tag() }}
+            <h1 class="h3 mb-3 font-weight-normal">
+                Masuk
+            </h1>
+            <br>
+            {{ form.username.label() }}
+            {{ form.username(class="form-control", placeholder="Username") }}
+
+            {{ form.password.label() }}
+            {{ form.password(class="form-control", placeholder="Password") }}
+
+
+            <input type="checkbox" onclick="myFunction()">Tampilkan Password
+            <script>
+                function myFunction() {
+                    var x = document.getElementById("password");
+                    if (x.type === "password") {
+                        x.type = "text";
+                    } else {
+                        x.type = "password";
+                    }
+                } 
+            </script>
+            <br>
+
+            <br>
+
+            {{ form.submit(class="btn btn-xs btn-block btn-secondary") }}
+
+            <br>
+            <div class="checkbox mb-3">
+                <a href="{{ url_for('register_page') }}">
+                <h6>Belum punya akun?</h6>
+                </a>
+            </div>
+
+        </form>
+    </div>
+ </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Home Page
+{% endblock %}
+
+{% block style %}
+.jumbotron {
+  background-color: #a9ca31; /* green? */
+  color: #252525; /* font color black */
+  padding: 100px 25px;
+}
+/* Full height image header */
+.bgimg-1 {
+  background-position: center;
+  background-size: cover;
+  background-image: url("https://s3-wp-lyleprintingandp.netdna-ssl.com/wp-content/uploads/2015/04/10180015/Kale-696x272.jpg");
+  min-height: 100%;
+}
+{% endblock %}
+
+{% block content %}
+
+ <body>
+  <header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
+   <div class="text-left text-white" style="padding:128px">
+    <span class="w3-jumbo w3-hide-small">Hama pada pertanian</span>
+    <br />
+    <span class="w3-large">kami melakukan pengamatan terhadap hama pada pertanian dengan menggunakan sistem baru. Mari coba sistem kami!</span>
+        {% if current_user.is_authenticated %}
+            <p><a href="{{ url_for('upload_page') }}" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Coba Sistem</a></p>
+        {% else %}
+            <p><a href="{{ url_for('login_page') }}" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Coba Sistem</a></p>
+        {% endif %}
+   </div>
+  </header>
+
+  <div class="position-relative overflow-hidden text-center">
+   <div class="col-sm-10 p-sm-5 mx-auto my-1">
+<!--    <h1 class="display-4 font-weight-normal">Hama pada Pertanian</h1>-->
+<!--    <p class="lead font-weight-normal">Lihat data hama dengan klik tombol dibawah</p>-->
+      <p class="lead">
+       Banyaknya hama pada pertanian menimbulkan berbagai permasalahan bagi produsen dan konsumen. Maka dari itu dibuatkan website ini sebagai sarana untuk dapat membantu
+       meningkatkan produk yang dihasilkan. Pada website ini diberikan ulasan singkat mengenai beberapa jenis hama yang umum mengganggu pertumbuhan tanaman pertanian.
+       Selain itu, pada website ini disediakan juga data-data jumlah hama yang didapatkan menggunakan perangkap hama <i>yellow sticky trap</i>.
+      </p>
+   </div>
+  </div>
+
+  <div data-bs-spy="scroll" data-bs-target="#navbar-5" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+  <div class="position-relative overflow-hidden text-center">
+   <div class="col-sm-10 p-xs mx-auto my-1">
+      <h2 id="hama" class="text-center">Hama yang umum ditemukan</h2>
+      <p class="lead">
+          Terdapat berbagai jenis tanaman yang dibudidayakan pada pertanian. Pada tanaman-tanaman ini terdapat beberapa hama
+          yang umum ditemukan dan memberikan pengaruh buruk terhadap kuantitas dan kualitas produk budidaya yang dihasilkan,
+          berikut datanya.
+      </p>
+   </div>
+  </div>
+
+   <div class="album py-3 bg-white">
+    <div class="container">
+      <div class="row row-cols-sm-4 row-cols-sm-2 g-1">
+
+        <div class="col">
+          <div class="card shadow-sm h-100">
+            <img src="static/images/resource/whitefly3.jpg" height="140">
+<!--            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.UuAwkXsG1iKM-PpXPBvTbwHaD4%26pid%3DApi&f=1" height="235">-->
+            <div class="card-body">
+              <h4 class="card-title"><i>Whitefly</i></h4>
+              <p class="card-text">
+                  Hama yang satu ini umumnya dikenal dengan beberapa nama yaitu 'kutu putih' atau..
+              </p>
+                  <a href="{{ url_for('hama_whitefly') }}" class="btn btn-sm btn-outline-secondary">Selengkapnya</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card shadow-sm h-100">
+            <img src="static/images/resource/thrips_cabai.jpg" height="140">
+<!--              <img src="static/images/resource/thrips_jeruk.jpg">-->
+<!--            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.f4CDEh90q4JcIFvqrY9MNQHaFj%26pid%3DApi&f=1"  height="235">-->
+            <div class="card-body">
+              <h4 class="card-title"><i>Thrips</i></h4>
+              <p class="card-text">
+                  <i>Thrips</i> merupakan hama yang berukuran cukup kecil dengan ukuran 1 mm hingga 2 mm..
+              </p>
+                  <a href="{{ url_for('hama_thrips') }}" class="btn btn-sm btn-outline-secondary">Selengkapnya</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card shadow-sm h-100">
+            <img src="static/images/resource/leafminer_paprika.jpg" height="140">
+<!--            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.7cnAP5RvqXZE_CFxixB7lAAAAA%26pid%3DApi&f=1" height="235">-->
+            <div class="card-body">
+              <h4 class="card-title"><i>Leaf Miner</i></h4>
+              <p class="card-text">
+                  <i>Leaf miner</i> atau pengerek daun merupakan hama yang berukuran sekitar 2 mm berwarna..
+              </p>
+                  <a href="{{ url_for('hama_leafminer') }}" class="btn btn-sm btn-outline-secondary">Selengkapnya</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card shadow-sm h-100">
+            <img src="static/images/resource/lalatbuah_jeruk.jpg" height="140">
+<!--            <img src="https://www.gardeningknowhow.com/wp-content/uploads/2014/06/Mediterranean-fruit-fly-400x351.jpg"  height="235">-->
+<!--            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.ukaszFr5j6z6UlqF0npPIQHaGg%26pid%3DApi&f=1"  height="235">-->
+            <div class="card-body">
+              <h4 class="card-title">Lalat buah</h4>
+              <p class="card-text">
+                  Lalat buah merupakan hama yang umum ditemui. Pada bagian ini akan dibahas lalat buah..
+              </p>
+                  <a href="{{ url_for('hama_lalatbuah') }}" class="btn btn-sm btn-outline-secondary">Selengkapnya</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+ <br><br>
+  </div>
+ </body>
+
+{% endblock %}
