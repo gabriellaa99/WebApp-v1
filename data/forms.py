@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, SelectField
 from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError
-from .models import User, Device
+from .models import User
 from flask_wtf.file import FileField
 from datetime import datetime, timezone
 from flask_login import current_user
@@ -44,8 +44,6 @@ class UploadForm(FlaskForm):
     file = FileField()
     # device = SelectField(label='Device:', validators=[DataRequired()])
     place = StringField(label='Lokasi:', validators=[DataRequired()])
-    created_at = datetime.now(timezone.utc)
-    updated_at = datetime.now(timezone.utc)
     submit = SubmitField(label='Unggah Gambar')
 
     def __init__(self):

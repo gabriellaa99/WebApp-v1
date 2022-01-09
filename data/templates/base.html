@@ -123,10 +123,12 @@
     <!-- Links -->
     <ul class="navbar-nav">
      <li class="nav-item"> <a class="nav-link" href="{{ url_for('home_page') }}">Beranda<span class="sr-only">(current)</span></a> </li>
-     <li class="nav-item"> <a class="nav-link" href="#hama">Penjelasan Hama</a> </li>
+     <li class="nav-item"> <a class="nav-link" href="{{ url_for('home_page') }}" href="#hama">Penjelasan Hama</a> </li>
      {% if current_user.is_authenticated %}
        <li class="nav-item"> <a class="nav-link" href="{{ url_for('data_page') }}">Data</a> </li>
-       <li class="nav-item"> <a class="nav-link" href="{{ url_for('upload_page') }}">Unggah</a> </li>
+
+   <!-- comment 'unggah' if API successfull -->
+<!---->
 <!--       <li class="nav-item"> <a class="nav-link" href="{{ url_for('reset_page') }}">Reset</a> </li>-->
        <li class="nav-item"> <a class="nav-link" href="{{ url_for('logout_page') }}">Keluar</a> </li>
      {% else %}
@@ -136,13 +138,14 @@
    </div>
   </nav>
 
-
+<div style="width:80px; height:62px;"></div>
   {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
       {% for category, message in messages %}
         <div class="alert alert-{{ category }} alert-dismissible">
          <button type="button" class="m close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
-           {{ messages }}
+           {{ message }}
+            <br>
         </div>
       {% endfor %}
     {% endif %}

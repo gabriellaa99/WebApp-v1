@@ -85,7 +85,6 @@ def Database (filename,t,w,d):
     result =    Result(
                 image=os.path.join(OUTPUT_FOLDER, filename),
                 total = t, #Total Pest
-                uploaded_at = datetime.utcnow().astimezone(pytz.timezone("Asia/Jakarta")),
                 whitefly = w, #Total Whitefly
                 damage = d #Persentase kerusakan
                 )

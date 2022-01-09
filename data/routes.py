@@ -1,6 +1,6 @@
 from . import app
 from flask import render_template, redirect, url_for, flash, request
-from .models import User, Device, Image, Result
+from .models import User, Image, Result
 from .forms import RegisterForm, LoginForm, UploadForm, RegisterDeviceForm, PasswordResetForm, ForgotPasswordForm
 from . import db
 from flask_login import login_user, logout_user, login_required, LoginManager, current_user
@@ -119,7 +119,8 @@ def data_page():
         """
 
         item.result = result
-
+    for item in items:
+        item.created_at = item.created_at.strftime("%d %B %Y %H:%M")
     print('items:', items)
     return render_template("data.html", items=items)
 
@@ -143,9 +144,7 @@ def upload_page():
             image_to_create = Image(user_id=current_user.id,
                                     # device_id=device_id,
                                     image='static/images/input/' + filename,
-                                    place=place,
-                                    created_at=form.created_at,
-                                    updated_at=form.updated_at)
+                                    place=place)
             db.session.add(image_to_create)
             db.session.commit()
             flash('Success! You have uploaded an image', category='success')
@@ -155,11 +154,11 @@ def upload_page():
                 flash(f'There was an error uploading an image: {err_msg}', category='danger')
 
     if request.method == "GET":
-        if len(Device.query.filter_by(user=current_user.id).all()) > 0:
+        # if len(Device.query.filter_by(user=current_user.id).all()) > 0:
             return render_template('upload.html', form=form)
-        else:
-            flash('You do not have any device registered', category='danger')
-            return redirect(url_for('register_device'))
+        # else:
+        #     flash('You do not have any device registered', category='danger')
+        #     return redirect(url_for('register_device'))
 
 """
         if form.validate_on_submit():
@@ -218,8 +217,16 @@ def register_page():
                   category='success')
             return redirect(url_for('home_page'))
         if form.errors != {}:  # if there are not errors from the validations
-            for err_msg in form.errors.values():
-                flash(f'There was an error with creating a user: {err_msg}', category='danger')
+            # error_message = "Error: <br>"
+            # for err_msg in form.errors.values():
+            #     flash(f'There was an error registering user: {err_msg}', category='danger')
+            for field,errs in form.errors.items():
+                flash(f'{field} : {", ".join(errs)}', category='danger')
+                # for msg in err_msg:
+                #     error_message += msg + "<br>"
+            # flash(error_message, category='danger')
+            # print(error_message)
+            return render_template("register.html", form=form)
 
     if request.method == "GET":
         return render_template("register.html", form=form)
@@ -331,30 +338,30 @@ def logout_page():
     return redirect(url_for("home_page"))
 
 
-@app.route("/register_device", methods=["GET", "POST"])
-@login_required
-def register_device():
-    form = RegisterDeviceForm()
-    if request.method == "POST":
-        if form.validate_on_submit():
-            user = current_user.id
-            serial = form.serial.data
-            firmware_version = form.firmware_version.data
-            hardware_version = form.hardware_version.data
-
-            device_to_create = Device(user=user, serial=serial, firmware_version=firmware_version,
-                                      hardware_version=hardware_version)
-            db.session.add(device_to_create)
-            db.session.commit()
-            flash('Success! You have registered a device', category='success')
-            return redirect(url_for('register_device'))
-        if form.errors != {}:  # if there are not errors from the validations
-            for err_msg in form.errors.values():
-                flash(f'There was an error registering the device: {err_msg}', category='danger')
-
-    if request.method == "GET":
-        return render_template('device.html', form=form)
-
+# @app.route("/register_device", methods=["GET", "POST"])
+# @login_required
+# def register_device():
+#     form = RegisterDeviceForm()
+#     if request.method == "POST":
+#         if form.validate_on_submit():
+#             user = current_user.id
+#             serial = form.serial.data
+#             firmware_version = form.firmware_version.data
+#             hardware_version = form.hardware_version.data
+#
+#             device_to_create = Device(user=user, serial=serial, firmware_version=firmware_version,
+#                                       hardware_version=hardware_version)
+#             db.session.add(device_to_create)
+#             db.session.commit()
+#             flash('Success! You have registered a device', category='success')
+#             return redirect(url_for('register_device'))
+#         if form.errors != {}:  # if there are not errors from the validations
+#             for err_msg in form.errors.values():
+#                 flash(f'There was an error registering the device: {err_msg}', category='danger')
+#
+#     if request.method == "GET":
+#         return render_template('device.html', form=form)
+#
 
 @app.route('/api/upload', methods=['POST'])
 def api_upload():
@@ -362,9 +369,9 @@ def api_upload():
         content = request.json
         """ Dummy Content
             {
-                "username": "Username 1",
-                "password": "le password",
-                "device_hardware" : "user1 device",
+                "username": "gabriela",
+                "password": "25100099",
+                "device_hardware" : "Iphone 5s",
                 "place" : "garden 1",
                 "image": "..."
             }

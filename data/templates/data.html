@@ -46,12 +46,12 @@
 <div class="d-flex justify-content-center">
 <div class="card mb-3" style="width: 690px;">
   <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-5">
       <img class="img-fluid" src="{{ item.image }}" alt="Uploaded Image">
     </div>
-    <div class="col-lg-0">
+    <div class="col-md-6">
       <div class="card-body">
-        <h5 class="card-title">Time: {{ item.created_at }}</h5>
+        <h5 class="card-title">{{ item.created_at }}</h5>
       </div>
   <ul class="list-group list-group-flush text-left">
   {% if item.result != None %}
@@ -61,7 +61,10 @@
 <!--        Hama Terdeteksi: {{ item.result.total }}    <br>-->
 <!--        1. Whitefly: {{ item.result.whitefly }}-->
         Hama Terdeteksi:<br>
-        1. Whitefly: {{ item.result.damage*100 }}%
+        1. Whitefly: {{ item.result.damage*100 }}%  <br>
+        2. Thrips: --  <br>
+        3. Leafminer: --  <br>
+        4. Lalat Buah: --
     </li>
     <li class="list-group-item">
         Rekomendasi:<br>
@@ -164,9 +167,9 @@
 <!--    </form>-->
 
             <h6 class="h6 text-center">
-                Demikian contoh data yang telah diproses, untuk mencoba sistem kami tekan <a href="{{ url_for('upload_page') }}">disini</a>.
+                Demikian contoh data yang telah diproses. Hubungi kami untuk menggunakan sistem ini.
+<!--                Demikian contoh data yang telah diproses, untuk mencoba sistem kami tekan disini.-->
             </h6>
-
   </div>
 </div>
 

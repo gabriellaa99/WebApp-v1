@@ -8,9 +8,14 @@ from.constant import UPLOAD_FOLDER
 
 
 app = Flask(__name__)
+
+# comment for debugging
+# import logging
+# log = logging.getLogger("werkzeug")
+# log.setLevel(logging.ERROR)
+
 app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql+pymysql://flask_user:password@localhost/data_hama'
-#app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql+pymysql://db_user:password@localhost/data_hama'
-# app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///data.db'
+# app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql+pymysql://tech_biops:techbiops1234@localhost/pests_diseases'
 app.config["SECRET_KEY"] = 'ab98fc0e1995767a2703d7be'
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16*1024*1024
