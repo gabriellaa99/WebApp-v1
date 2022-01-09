@@ -20,6 +20,7 @@ rng.seed(12345)
 pest=[]
 
 def Detect(j,filename):
+    global pest
     start = time.time()
 #=================================== Load Images ======================================
     img = cv2.imread(os.path.join(UPLOAD_FOLDER, filename))  # Path file gambar (folder/nama file)
@@ -91,6 +92,7 @@ def Database (filename,t,w,d):
     return result
 
 def process_image(filename):
+    global pest
     print('========================================================')
     print('Detection Starting...')
     print('Detecting Whitefly...')
@@ -108,6 +110,7 @@ def process_image(filename):
     print('Damage done by pest: ' + str(d) + ' %')
     result = Database(filename,t,w,d) #Masukin data ke database
     print('Detection Finished')
+    pest = []
     return result
 
 

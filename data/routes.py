@@ -398,6 +398,8 @@ def api_upload():
                     f.write(imgdata)
                 image_to_create = Image(user_id=attempted_user.id,
                                         # device_id=device.id,
+
+                                        created_at=datetime.now(pytz.timezone("Asia/Jakarta")),
                                         image=os.path.join(INPUT_FOLDER, filename),
                                         place=content["place"])
                 db.session.add(image_to_create)
